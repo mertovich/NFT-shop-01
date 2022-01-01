@@ -1,0 +1,11 @@
+.NavBar{
+    background-color: transparent}
+.NavBarLink{
+    text-decoration: none;
+    color: #F5F5F5;
+    padding: 10px;
+}
+.NavBarLink:hover{
+    color: #F05454;
+    border-bottom: #F05454 solid 2px;
+}
