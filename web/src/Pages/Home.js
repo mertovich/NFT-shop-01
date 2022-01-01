@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
+import HomeTwoSection from '../Components/HomeTwoSection'
+
 
 export default class Home extends Component {
     render() {
@@ -8,8 +10,10 @@ export default class Home extends Component {
                 <Container>
                     <Row>
                         <Col>
+
                         </Col>
                         <Col>
+                            <HomeTwoSection/>
                         </Col>
                     </Row>
                 </Container>
