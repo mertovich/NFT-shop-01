@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import HomeTwoSection from '../Components/HomeTwoSection'
+import HomeOneSection from '../Components/HomeOneSection'
 
 
 export default class Home extends Component {
@@ -10,10 +11,10 @@ export default class Home extends Component {
                 <Container>
                     <Row>
                         <Col>
-
+                            <HomeOneSection />
                         </Col>
                         <Col>
-                            <HomeTwoSection/>
+                            <HomeTwoSection />
                         </Col>
                     </Row>
                 </Container>
