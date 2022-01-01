@@ -61,12 +61,34 @@
 .RegisterFormButton{
     border: none;
     padding: 10px;
-width: 100%;
+    width: 100%;
     color: #F5F5F5;
     background-color: #F05454;
     border-radius: 10px;
 }
 
 .RegisterFormButton:hover{
+    background-color: #30475E;
+}
+
+/* RegisterForm-end */
+
+.LogiFormConteiner{
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    text-align: center;
+}
+
+.LoginFormButton{
+    border: none;
+    padding: 10px;
+    width: 100%;
+    color: #F5F5F5;
+    background-color: #F05454;
+    border-radius: 10px;
+}
+
+.LoginFormButton:hover{
     background-color: #30475E;
 }
