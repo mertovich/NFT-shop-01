@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import homeNft from '../images/homeNft.svg'
+import '../App.css'
 
 export default class HomeTwoSection extends Component {
     render() {
