@@ -10,7 +10,7 @@ export default class NavBar extends Component {
             <div>
                 <Navbar  className='NavBar'>
                     <Container>
-                        <Navbar.Brand href="#home"><img src={Logo} height='50px' width='50px' />  </Navbar.Brand>
+                        <Navbar.Brand href="#home"><img src={Logo} height='30px' width='30px' />  </Navbar.Brand>
                         <Nav className="me-right">
                         <Link className='NavBarLink' to='/contact' >Home</Link>
                         <Link className='NavBarLink' to='/contact' >Shop</Link>
