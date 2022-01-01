@@ -21,7 +21,7 @@ export default class ProductList extends Component {
                                     <Card.Text>
                                         Price : 3 BTC
                                     </Card.Text>
-                                    <button className='ProductListCardBodyButton' > add to card </button>
+                                    <button className='ProductListCardBodyButton' > add to cart </button>
                                 </Card.Body>
                             </Card>
                         </Col>
