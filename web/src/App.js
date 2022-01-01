@@ -8,7 +8,7 @@ export default class App extends Component {
   render() {
     return (
       <div style={{
-        background: '#121212',
+        background: 'black',
         height: '100vh',
         width: '100%',
         overflowX: 'hidden',
