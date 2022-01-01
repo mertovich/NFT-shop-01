@@ -112,3 +112,20 @@
     color: #F5F5F5;
     background-color: #F05454;
 }
+
+/* ProductListCard-end */
+
+@media only screen and (max-width: 900px) {
+    .LogiFormConteiner{
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+
+    .RegisterFormConteiner{
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+
+/* form-end */
+
+  } 
