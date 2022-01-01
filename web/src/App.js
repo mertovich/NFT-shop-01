@@ -5,10 +5,12 @@ import NavBar from './Components/NavBar'
 import Register from './Pages/Register'
 import Login from './Pages/Login'
 import Store from './Pages/Store'
+import './App.css'
 
 export default class App extends Component {
   state = {
-    NavBarActive:'false'
+    NavBarActive:'false',
+    basket:[]
   }
 
   NavBarActiveButton = () =>{
@@ -21,6 +23,7 @@ export default class App extends Component {
       this.setState({NavBarActive:'false'})
     }
   }
+
   render() {
     return (
       <div style={{
