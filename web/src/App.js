@@ -4,6 +4,7 @@ import Home from './Pages/Home'
 import NavBar from './Components/NavBar'
 import Register from './Pages/Register'
 import Login from './Pages/Login'
+import Store from './Pages/Store'
 
 export default class App extends Component {
   render() {
@@ -19,6 +20,7 @@ export default class App extends Component {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/store' element={<Store />} />
         </Routes>
       </div>
     )
