@@ -26,8 +26,10 @@ export default class App extends Component {
     }
   }
 
-  addToCartButton = () =>{
-
+  addToCartButton = (product) =>{
+    let tmp = this.state.basket
+    tmp.push(product)
+    this.setState({basket:tmp})
   }
 
   getProductList = () =>{
@@ -49,8 +51,8 @@ export default class App extends Component {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} />} />
-          <Route path='/basket' element={<Basket />} />
+          <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
+          <Route path='/basket' element={<Basket basket={this.state.basket} />} />
         </Routes>
       </div>
     )
