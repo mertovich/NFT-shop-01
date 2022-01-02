@@ -7,10 +7,11 @@ export default class RegisterForm extends Component {
     render() {
         return (
             <div className='RegisterFormConteiner'>
-                <img  src={Logo} height='100px'width='100px' />
+                <img src={Logo} height='100px' width='100px' />
                 <Form inline>
                     <FormGroup floating>
                         <Input
+                            onChange={(event) => this.props.onChangeHandler(event)}
                             id="name"
                             name="name"
                             placeholder="Name"
@@ -23,6 +24,7 @@ export default class RegisterForm extends Component {
 
                     <FormGroup floating>
                         <Input
+                            onChange={(event) => this.props.onChangeHandler(event)}
                             id="lastName"
                             name="lastName"
                             placeholder="Last Name"
@@ -35,6 +37,7 @@ export default class RegisterForm extends Component {
 
                     <FormGroup floating>
                         <Input
+                            onChange={(event) => this.props.onChangeHandler(event)}
                             id="exampleEmail"
                             name="email"
                             placeholder="Email"
@@ -47,6 +50,7 @@ export default class RegisterForm extends Component {
 
                     <FormGroup floating>
                         <Input
+                            onChange={(event) => this.props.onChangeHandler(event)}
                             id="examplePassword"
                             name="password"
                             placeholder="Password"
@@ -57,8 +61,9 @@ export default class RegisterForm extends Component {
                         </Label>
                     </FormGroup>
 
-                    <button 
-                    className='RegisterFormButton'
+                    <button
+                    onClick={(event)=> this.props.registerSubmitHandler(event)}
+                        className='RegisterFormButton'
                     >
                         Register
                     </button>

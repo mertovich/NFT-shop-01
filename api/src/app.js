@@ -1,4 +1,6 @@
 require('dotenv').config();
+const morgan = require('morgan')
+const helmet = require('helmet')
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
@@ -7,6 +9,7 @@ const mongoose = require('mongoose')
 const checkJwt = require('./Auth')
 const jwt = require('jsonwebtoken');
 const User = require('./UserModel')
+
 
 mongoose.connect(process.env.MONGO_URL, (err) => {
     if (!err) {
@@ -17,7 +20,9 @@ mongoose.connect(process.env.MONGO_URL, (err) => {
 var urlEncodedParser = bodyParser.urlencoded()
 
 const app = express();
+app.use(morgan('combined'))
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
 
 app.post('/productlist', urlEncodedParser, (req, res, next) => {
