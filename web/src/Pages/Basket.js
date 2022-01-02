@@ -6,7 +6,7 @@ export default class Basket extends Component {
     render() {
         return (
             <div>
-                <BasketList basket={this.props.basket} />
+                <BasketList basket={this.props.basket} removeProductBasketList={this.props.removeProductBasketList} />
             </div>
         )
     }

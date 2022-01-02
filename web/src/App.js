@@ -27,8 +27,22 @@ export default class App extends Component {
   }
 
   addToCartButton = (product) =>{
-    let tmp = this.state.basket
-    tmp.push(product)
+    let basketList = this.state.basket
+    let tmp = basketList.find(p => p._id === product._id)
+    if (!tmp) {
+      basketList.push(product)
+    }
+    this.setState({basket:basketList})
+  }
+
+  removeProductBasketList = (id) =>{
+    let tmpList = this.state.basket
+    let tmp = []
+    tmpList.forEach(item=>{
+      if (item._id !== id) {
+        tmp.push(item)
+      }
+    })
     this.setState({basket:tmp})
   }
 
@@ -52,7 +66,7 @@ export default class App extends Component {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
-          <Route path='/basket' element={<Basket basket={this.state.basket} />} />
+          <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
         </Routes>
       </div>
     )

@@ -23,7 +23,7 @@ export default class BasketList extends Component {
                                 <td>{product.description}</td>
                                 <td>{product.artiste}</td>
                                 <td>{product.price} BTC</td>
-                                <td><Button style={{width:'100%'}} variant="danger">Delet</Button></td>
+                                <td><Button onClick={()=> this.props.removeProductBasketList(product._id)} style={{width:'100%'}} variant="danger">Delet</Button></td>
                             </tr>
                         ))}
                     </tbody>
