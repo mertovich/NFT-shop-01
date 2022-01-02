@@ -5,7 +5,7 @@ export default class Register extends Component {
     render() {
         return (
             <div>
-                <RegisterForm/>
+                <RegisterForm onChangeHandler={this.props.onChangeHandler} registerSubmitHandler={this.props.registerSubmitHandler} />
             </div>
         )
     }
