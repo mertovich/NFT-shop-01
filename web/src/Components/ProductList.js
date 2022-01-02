@@ -2,25 +2,31 @@ import React, { Component } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 
 export default class ProductList extends Component {
+    componentDidMount(){
+        this.props.getProductList()
+    }
     render() {
         return (
             <div>
                 <Row xs={1} md={3} className="g-4">
-                    {Array.from({ length: 20 }).map((_, idx) => (
+                    {this.props.productList.map(product => (
                         <Col>
-                            <Card  style={{
-                            border:'none'
+                            <Card style={{
+                                border: 'none'
                             }}>
-                                <Card.Img variant="top" src="https://digiltable.com/wp-content/uploads/edd/2021/04/Nft-Collection-NUSRET-of-the-21st-century-1024x1024.png" />
+                                <Card.Img variant="top" src={product.url} />
                                 <Card.Body className='ProductListCardBody' >
-                                    <Card.Title>Card title</Card.Title>
+                                    <Card.Title>{product.name}</Card.Title>
                                     <Card.Text>
-                                        This is a longer card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.
+                                        {product.description}
                                     </Card.Text>
                                     <Card.Text>
-                                        Price : 3 BTC
+                                        {product.artiste}
                                     </Card.Text>
+                                    <Card.Text>
+                                        {product.price} BTC
+                                    </Card.Text>
+                                    
                                     <button className='ProductListCardBodyButton' > add to cart </button>
                                 </Card.Body>
                             </Card>
