@@ -6,22 +6,27 @@ import Register from './Pages/Register'
 import Login from './Pages/Login'
 import Store from './Pages/Store'
 import './App.css'
+import Basket from './Pages/Basket'
 
 export default class App extends Component {
   state = {
-    NavBarActive:'false',
-    basket:[]
+    NavBarActive: 'false',
+    basket: []
   }
 
-  NavBarActiveButton = () =>{
-    if(this.state.NavBarActive === 'false'){
-      this.setState({NavBarActive:'true'})
+  NavBarActiveButton = () => {
+    if (this.state.NavBarActive === 'false') {
+      this.setState({ NavBarActive: 'true' })
     }
   }
-  NavBarActiveButtonOver = () =>{
-    if(this.state.NavBarActive === 'true'){
-      this.setState({NavBarActive:'false'})
+  NavBarActiveButtonOver = () => {
+    if (this.state.NavBarActive === 'true') {
+      this.setState({ NavBarActive: 'false' })
     }
+  }
+
+  addToCartButton = () =>{
+
   }
 
   render() {
@@ -32,12 +37,13 @@ export default class App extends Component {
         width: '100%',
         overflowX: 'hidden',
       }} >
-        <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver}  />
+        <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/store' element={<Store />} />
+          <Route path='/basket' element={<Basket />} />
         </Routes>
       </div>
     )

@@ -115,6 +115,10 @@
 
 /* ProductListCard-end */
 
+
+
+
+
 @media only screen and (max-width: 900px) {
     .LogiFormConteiner{
         margin-right: 10%;
@@ -127,5 +131,4 @@
     }
 
 /* form-end */
-
-  } 
+}
