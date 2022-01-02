@@ -7,7 +7,7 @@ export default class Store extends Component {
         return (
             <div>
                 <Container>
-                    <ProductList productList={this.props.productList} getProductList={this.props.getProductList} />
+                    <ProductList productList={this.props.productList} getProductList={this.props.getProductList} addToCartButton={this.props.addToCartButton} />
                 </Container>
             </div>
         )

@@ -27,7 +27,7 @@ export default class ProductList extends Component {
                                         {product.price} BTC
                                     </Card.Text>
                                     
-                                    <button className='ProductListCardBodyButton' > add to cart </button>
+                                    <button onClick={() => this.props.addToCartButton(product)} className='ProductListCardBodyButton' > add to cart </button>
                                 </Card.Body>
                             </Card>
                         </Col>

@@ -6,7 +6,7 @@ export default class Basket extends Component {
     render() {
         return (
             <div>
-                <BasketList/>
+                <BasketList basket={this.props.basket} />
             </div>
         )
     }
