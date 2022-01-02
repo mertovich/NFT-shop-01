@@ -7,6 +7,7 @@ import Login from './Pages/Login'
 import Store from './Pages/Store'
 import './App.css'
 import Basket from './Pages/Basket'
+import Profile from './Pages/Profile'
 
 export default class App extends Component {
   state = {
@@ -64,9 +65,8 @@ export default class App extends Component {
   registerSubmitHandler = async (event) => {
     await this.register()
     let user = this.state.user
-    this.setState({token:user.token})
-    this.setState({loginStatus:user.login})
-    alert(this.state.loginStatus)
+    this.setState({ token: user.token })
+    this.setState({ loginStatus: user.login })
     event.preventDefault();
   }
 
@@ -78,7 +78,13 @@ export default class App extends Component {
     }
     fetch('http://localhost:8080/register', requestOptions)
       .then(response => response.json())
-      .then(data => this.setState({user:data}));
+      .then(data => this.setState({ user: data }));
+  }
+
+  logOutButton = () =>{
+    this.setState({token:''})
+    this.setState({loginStatus:''})
+    this.setState({user:{}})
   }
 
   render() {
@@ -89,13 +95,14 @@ export default class App extends Component {
         width: '100%',
         overflowX: 'hidden',
       }} >
-        <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver} />
+        <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver} loginStatus={this.state.loginStatus} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} />} />
+          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} />} />
           <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
           <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
+          <Route path='/profile' element={this.state.loginStatus === 'true'? <Profile user={this.state.user} logOutButton={this.logOutButton} /> : null} />
         </Routes>
       </div>
     )

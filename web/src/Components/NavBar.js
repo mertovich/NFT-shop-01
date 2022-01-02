@@ -20,8 +20,8 @@ export default class NavBar extends Component {
                             <Nav>
                                 <Link className='NavBarLink' to='/' >Home</Link>
                                 <Link className='NavBarLink' to='/store' >Store</Link>
-                                <Link className='NavBarLink' to='/register' >Register</Link>
-                                <Link className='NavBarLink' to='/login' >Login</Link>
+                                {this.props.loginStatus === 'true'?  <Link className='NavBarLink' to='/profile' >Profile</Link> :  <Link className='NavBarLink' to='/register' >Register</Link> }
+                                {this.props.loginStatus === 'true'?  null :  <Link className='NavBarLink' to='/login' >Login</Link> }
                                 {this.props.NavBarActive === 'true' ? <Link onMouseOut={() => this.props.NavBarActiveButtonOver()} onMouseOver={() => this.props.NavBarActiveButton()} className='NavBarLink' to='/basket' >Basket <img src={basketLogoRed} height='15px' width='15px' /> </Link> : <Link onMouseOut={() => this.props.NavBarActiveButtonOver()} onMouseOver={() => this.props.NavBarActiveButton()} className='NavBarLink' to='/basket' >Basket <img src={basketLogo} height='15px' width='15px' /> </Link>}
                             </Nav>
                         </Navbar.Collapse>
