@@ -6,7 +6,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                {this.props.loginStatus === 'true'? <ProfilePage user={this.props.user} logOutButton={this.props.logOutButton} /> :<LoginForm/> }  
+                {this.props.loginStatus === 'true'? <ProfilePage user={this.props.user} logOutButton={this.props.logOutButton} /> :<LoginForm onChangeHandler={this.props.onChangeHandler} loginSubmitHandler={this.props.loginSubmitHandler} /> }  
             </div>
         )
     }

@@ -81,10 +81,29 @@ export default class App extends Component {
       .then(data => this.setState({ user: data }));
   }
 
-  logOutButton = () =>{
-    this.setState({token:''})
-    this.setState({loginStatus:''})
-    this.setState({user:{}})
+  logOutButton = () => {
+    this.setState({ token: '' })
+    this.setState({ loginStatus: '' })
+    this.setState({ user: {} })
+  }
+
+  loginSubmitHandler = async (event) => {
+    await this.login()
+    let user = this.state.user
+    this.setState({ token: user.token })
+    this.setState({ loginStatus: user.login })
+    event.preventDefault();
+  }
+
+  login = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: this.state.email, password: this.state.password })
+    }
+    fetch('http://localhost:8080/login', requestOptions)
+      .then(response => response.json())
+      .then(data => this.setState({ user: data }));
   }
 
   render() {
@@ -99,10 +118,10 @@ export default class App extends Component {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} />} />
-          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} />} />
+          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} />} />
           <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
           <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
-          <Route path='/profile' element={this.state.loginStatus === 'true'? <Profile user={this.state.user} logOutButton={this.logOutButton} /> : null} />
+          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} /> : null} />
         </Routes>
       </div>
     )

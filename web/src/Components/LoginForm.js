@@ -6,10 +6,11 @@ export default class LoginForm extends Component {
     render() {
         return (
             <div className='LogiFormConteiner' >
-                 <img  src={Logo} height='100px'width='100px' />
+                <img src={Logo} height='100px' width='100px' />
                 <Form inline>
                     <FormGroup floating>
                         <Input
+                            onChange={(event) => this.props.onChangeHandler(event)}
                             id="exampleEmail"
                             name="email"
                             placeholder="Email"
@@ -22,6 +23,7 @@ export default class LoginForm extends Component {
 
                     <FormGroup floating>
                         <Input
+                            onChange={(event) => this.props.onChangeHandler(event)}
                             id="examplePassword"
                             name="password"
                             placeholder="Password"
@@ -33,6 +35,7 @@ export default class LoginForm extends Component {
                     </FormGroup>
 
                     <button
+                    onClick={(event)=> this.props.loginSubmitHandler(event)}
                         className='LoginFormButton'
                     >
                         Login
