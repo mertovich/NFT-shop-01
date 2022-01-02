@@ -33,4 +33,14 @@ app.post('/productlist',urlEncodedParser,(req,res,next)=>{
     })
 })
 
+app.get('/productlist',urlEncodedParser,(req,res)=>{
+    Product.find({},(err,data)=>{
+        if (err) {
+            throw err
+        }
+        res.send(data)
+        res.status(200).end()
+    })
+})
+
 module.exports = app;
