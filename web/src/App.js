@@ -11,7 +11,8 @@ import Basket from './Pages/Basket'
 export default class App extends Component {
   state = {
     NavBarActive: 'false',
-    basket: []
+    basket: [],
+    productList:[]
   }
 
   NavBarActiveButton = () => {
@@ -29,6 +30,12 @@ export default class App extends Component {
 
   }
 
+  getProductList = () =>{
+    fetch('http://localhost:8080/productlist')
+    .then(data => data.json())
+    .then(data => this.setState({productList:data}))
+  }
+
   render() {
     return (
       <div style={{
@@ -42,7 +49,7 @@ export default class App extends Component {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/store' element={<Store />} />
+          <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} />} />
           <Route path='/basket' element={<Basket />} />
         </Routes>
       </div>
