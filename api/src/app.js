@@ -57,7 +57,8 @@ app.post('/register', urlEncodedParser, async (req, res) => {
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        balance: 0
     })
     await tmp.save((err) => {
         if (err) {
@@ -85,6 +86,7 @@ app.post('/register', urlEncodedParser, async (req, res) => {
             lastName: data[0].lastName,
             email: data[0].email,
             password: data[0].password,
+            balance: data[0].balance,
         })
         res.status(200).end()
     })  
@@ -113,6 +115,7 @@ app.post('/login', urlEncodedParser, (req, res, next) => {
                     lastName: userInfo.lastName,
                     email: userInfo.email,
                     password: userInfo.password,
+                    balance: userInfo.balance,
                 })
                 res.status(200).end
             }
