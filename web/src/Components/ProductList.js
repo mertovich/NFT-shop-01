@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
+import btcGif from '../images/btcGif.gif'
 
 export default class ProductList extends Component {
     componentDidMount(){
@@ -24,7 +25,7 @@ export default class ProductList extends Component {
                                         {product.artiste}
                                     </Card.Text>
                                     <Card.Text>
-                                        {product.price} BTC
+                                        {product.price} <img src={btcGif} height='25px' width='25px' />
                                     </Card.Text>
                                     
                                     <button onClick={() => this.props.addToCartButton(product)} className='ProductListCardBodyButton' > add to cart </button>
