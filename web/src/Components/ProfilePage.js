@@ -12,6 +12,7 @@ export default class ProfilePage extends Component {
                     <p> name : {this.props.user.name} </p>
                     <p> Last Name : {this.props.user.lastName} </p>
                     <p> Email : {this.props.user.email} </p>
+                    <p> Balance : {this.props.user.balance} </p>
                     <Button onClick={() => this.props.logOutButton()} variant="outline-danger">Log Out</Button>
                 </Container>
             </div>
