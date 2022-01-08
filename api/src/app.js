@@ -51,7 +51,7 @@ app.get('/productlist', urlEncodedParser, (req, res) => {
     })
 })
 
-app.post('/register', urlEncodedParser, (req, res) => {
+app.post('/register', urlEncodedParser, async (req, res) => {
     let user;
     let tmp = User({
         name: req.body.name,
@@ -59,28 +59,35 @@ app.post('/register', urlEncodedParser, (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-    tmp.save((err) => {
+    await tmp.save((err) => {
         if (err) {
             throw err
         }
     })
-    let token = jwt.sign({
-        name: req.body.name,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        expiresIn: '7d'
-    }, process.env.TOKEN_SECRET)
 
-    res.json({
-        token: token,
-        login: 'true',
-        name: req.body.name,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-    })
-    res.status(200).end()
+    User.find({email:req.body.email,password:req.body.password},(err,data)=>{
+        if(err){
+            throw err
+        }
+        let token = jwt.sign({
+            name: req.body.name,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            expiresIn: '7d'
+        }, process.env.TOKEN_SECRET)
+
+        res.json({
+            token: token,
+            login: 'true',
+            id: data[0]._id,
+            name: data[0].name,
+            lastName: data[0].lastName,
+            email: data[0].email,
+            password: data[0].password,
+        })
+        res.status(200).end()
+    })  
 })
 
 app.post('/login', urlEncodedParser, (req, res, next) => {
@@ -98,10 +105,10 @@ app.post('/login', urlEncodedParser, (req, res, next) => {
                     password: userInfo.password,
                     expiresIn: '7d'
                 }, process.env.TOKEN_SECRET)
-                console.log(token)
                 res.json({
                     token:token,
                     login:'true',
+                    id: userInfo._id,
                     name: userInfo.name,
                     lastName: userInfo.lastName,
                     email: userInfo.email,

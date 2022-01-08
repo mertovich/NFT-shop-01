@@ -70,13 +70,13 @@ export default class App extends Component {
     event.preventDefault();
   }
 
-  register = () => {
+  register = async () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: this.state.name, lastName: this.state.lastName, email: this.state.email, password: this.state.password })
     }
-    fetch('http://localhost:8080/register', requestOptions)
+    await fetch('http://localhost:8080/register', requestOptions)
       .then(response => response.json())
       .then(data => this.setState({ user: data }));
   }
@@ -95,13 +95,13 @@ export default class App extends Component {
     event.preventDefault();
   }
 
-  login = () => {
+  login = async () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: this.state.email, password: this.state.password })
     }
-    fetch('http://localhost:8080/login', requestOptions)
+    await fetch('http://localhost:8080/login', requestOptions)
       .then(response => response.json())
       .then(data => this.setState({ user: data }));
   }
