@@ -66,8 +66,8 @@ app.post('/register', urlEncodedParser, async (req, res) => {
         }
     })
 
-    User.find({email:req.body.email,password:req.body.password},(err,data)=>{
-        if(err){
+    User.find({ email: req.body.email, password: req.body.password }, (err, data) => {
+        if (err) {
             throw err
         }
         let token = jwt.sign({
@@ -89,7 +89,7 @@ app.post('/register', urlEncodedParser, async (req, res) => {
             balance: data[0].balance,
         })
         res.status(200).end()
-    })  
+    })
 })
 
 app.post('/login', urlEncodedParser, (req, res, next) => {
@@ -105,11 +105,11 @@ app.post('/login', urlEncodedParser, (req, res, next) => {
                     lastName: userInfo.lastName,
                     email: userInfo.email,
                     password: userInfo.password,
-                    expiresIn: '7d'
+                    expiresIn: '7d',
                 }, process.env.TOKEN_SECRET)
                 res.json({
-                    token:token,
-                    login:'true',
+                    token: token,
+                    login: 'true',
                     id: userInfo._id,
                     name: userInfo.name,
                     lastName: userInfo.lastName,
@@ -120,8 +120,23 @@ app.post('/login', urlEncodedParser, (req, res, next) => {
                 res.status(200).end
             }
         } catch (error) {
-           res.status(404).end
+            res.status(404).end
         }
+    })
+})
+
+app.post('/balance',checkJwt,urlEncodedParser,(req,res)=>{
+    User.findById(req.body.id,(err,data)=>{
+        if (err) {
+            throw err
+        }
+        data.balance =  (parseInt(data.balance) + parseInt(req.body.number))
+        data.save((err)=>{
+            if (err) {
+                throw err
+            }
+            res.status(200).end()
+        })
     })
 })
 
