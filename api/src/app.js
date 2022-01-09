@@ -125,18 +125,47 @@ app.post('/login', urlEncodedParser, (req, res, next) => {
     })
 })
 
-app.post('/balance',checkJwt,urlEncodedParser,(req,res)=>{
-    User.findById(req.body.id,(err,data)=>{
+app.post('/balance', checkJwt, urlEncodedParser, (req, res) => {
+    User.findById(req.body.id, (err, data) => {
         if (err) {
             throw err
         }
-        data.balance =  (parseInt(data.balance) + parseInt(req.body.number))
-        data.save((err)=>{
+        data.balance = (parseInt(data.balance) + parseInt(req.body.number))
+        data.save((err) => {
             if (err) {
                 throw err
+                res.status(500).end()
             }
-            res.status(200).end()
         })
+    })
+    User.findById(req.body.id, (err, data) => {
+        if (err) {
+            throw err
+        }
+        let userInfo = data
+        try {
+            let token = jwt.sign({
+                name: userInfo.name,
+                lastName: userInfo.lastName,
+                email: userInfo.email,
+                password: userInfo.password,
+                balance: userInfo.balance,
+                expiresIn: '7d',
+            }, process.env.TOKEN_SECRET)
+            res.json({
+                token: token,
+                login: 'true',
+                id: userInfo._id,
+                name: userInfo.name,
+                lastName: userInfo.lastName,
+                email: userInfo.email,
+                password: userInfo.password,
+                balance: userInfo.balance,
+            })
+            res.status(200).end
+        } catch (error) {
+            res.status(404).end
+        }
     })
 })
 
