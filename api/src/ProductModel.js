@@ -6,6 +6,7 @@ var productSchema = mongoose.Schema({
     description:String,
     artiste:String,
     price:Number,
+    belonging:String,
 })
 
 var Product = mongoose.model('Product',productSchema)
