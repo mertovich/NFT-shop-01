@@ -106,6 +106,27 @@ export default class App extends Component {
       .then(data => this.setState({ user: data }));
   }
 
+  balanceSubmitHandler = async (event) => {
+    let tmp = this.state.number
+    if (tmp >= 1) {
+      await this.addBalance()
+    } else {
+      alert('Number cannot be less than 1')
+    }
+    event.preventDefault()
+  }
+
+  addBalance = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-access-token': this.state.token },
+      body: JSON.stringify({ id: this.state.user.id, number: this.state.number })
+    }
+    await fetch('http://localhost:8080/balance', requestOptions)
+      .then(response => response.json())
+      .then(data => this.setState({ user: data }));
+  }
+
   render() {
     return (
       <div style={{
@@ -117,11 +138,11 @@ export default class App extends Component {
         <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver} loginStatus={this.state.loginStatus} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} />} />
-          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} />} />
+          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} />} />
+          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} />} />
           <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
           <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
-          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} /> : null} />
+          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} /> : null} />
         </Routes>
       </div>
     )
