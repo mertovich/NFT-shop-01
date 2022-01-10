@@ -106,12 +106,29 @@
     background-color: #F5F5F5;
     color: #30475E;
     border-radius: 10px;
+    margin: 5px;
 }
 
 .ProductListCardBodyButton:hover{
     color: #F5F5F5;
     background-color: #F05454;
 }
+
+.ProductListCardBodyButtonBuy{
+    border: none;
+    padding: 10px;
+    width: 100%;
+    background-color: #F5F5F5;
+    color: #30475E;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.ProductListCardBodyButtonBuy:hover{
+    color: #F5F5F5;
+    background-color: #5cb85c;
+}
+
 
 /* ProductListCard-end */
 

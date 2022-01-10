@@ -170,19 +170,68 @@ app.post('/balance', checkJwt, urlEncodedParser, (req, res) => {
     })
 })
 
-app.post('/productupdate',checkJwt,urlEncodedParser,(req,res)=>{
-    Product.findById(req.body.id,(err,data)=>{
+app.post('/productupdate', checkJwt, urlEncodedParser, (req, res) => {
+    Product.findById(req.body.id, (err, data) => {
         if (err) {
             throw err
             res.status(500).end()
         }
         data.price = parseInt(req.body.number)
-        data.save((err)=>{
+        data.save((err) => {
             if (err) {
                 throw err
                 res.status(404).end()
             }
             res.status(200).end()
+        })
+    })
+})
+
+app.post('/productbuy', checkJwt, urlEncodedParser, (req, res) => {
+    let productPrice;
+    var lastUser;
+    Product.findById(req.body.id, (err, data) => {
+        if (err) {
+            throw err
+            res.status(500).end
+        }
+        productPrice = data.price
+        lastUser = data.belonging
+        data.belonging = req.body.userid
+        data.save((err) => {
+            if (err) {
+                throw err
+                res.status(404).end()
+            }
+        })
+        if (lastUser !== '') {
+            User.findById(lastUser, (err, data) => {
+                if (err) {
+                    throw err
+                    res.status(500).end()
+                }
+                data.balance = (parseInt(data.balance) + parseInt(productPrice))
+                data.save((err) => {
+                    if (err) {
+                        throw err
+                        res.status(500).end()
+                    }
+                })
+            })
+            
+        }
+    })
+    User.findById(req.body.userid, (err, data) => {
+        if (err) {
+            throw err
+            res.status(500).end()
+        }
+        data.balance = (parseInt(data.balance) - parseInt(productPrice))
+        data.save((err) => {
+            if (err) {
+                throw err
+                res.status(404).end()
+            }
         })
     })
 })

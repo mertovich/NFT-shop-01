@@ -146,6 +146,28 @@ export default class App extends Component {
     await fetch('http://localhost:8080/productupdate', requestOptions)
   }
 
+  productListBuy = async (product) =>{
+    let loginControl = this.state.loginStatus
+    if (loginControl === 'true') {
+      if (product.price <= this.state.user.balance) {
+        await this.buy(product._id)
+      }else{
+        alert('insufficient balance')
+      }
+    }else{
+      alert('Please login')
+    }
+  }
+
+  buy = async (id) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-access-token': this.state.token },
+      body: JSON.stringify({ id: id, userid: this.state.user.id })
+    }
+    await fetch('http://localhost:8080/productbuy', requestOptions)
+  }
+
   render() {
     return (
       <div style={{
@@ -159,7 +181,7 @@ export default class App extends Component {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} />} />
           <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} />} />
-          <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
+          <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} productListBuy={this.productListBuy} />} />
           <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
           <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} /> : null} />
         </Routes>
