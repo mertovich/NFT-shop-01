@@ -31,7 +31,8 @@ app.post('/productlist', urlEncodedParser, (req, res, next) => {
         name: req.body.name,
         description: req.body.description,
         artiste: req.body.artiste,
-        price: req.body.price
+        price: req.body.price,
+        belonging: req.body.belonging
     })
     tmp.save((err) => {
         if (err) {

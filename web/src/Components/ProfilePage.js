@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Button, Row, Col,Form } from 'react-bootstrap'
+import { Container, Button, Row, Col, Form ,Table} from 'react-bootstrap'
 import '../App.css'
 import btcGif from '../images/btcGif.gif'
 
@@ -19,17 +19,44 @@ export default class ProfilePage extends Component {
                                 <p> Balance : {this.props.user.balance} <img src={btcGif} height='25px' width='25px' /> </p>
                                 <Button onClick={() => this.props.logOutButton()} variant="outline-danger">Log Out</Button>
                                 <Form>
-                                <Form.Group className="mb-3" controlId="number">
-                                    <Form.Label style={{color:'white'}}>Number</Form.Label>
-                                    <Form.Control onChange={(event)=> this.props.onChangeHandler(event)} type="number" name='number' placeholder="Number" />
-                                </Form.Group>
-                                <Button onClick={(event)=> this.props.balanceSubmitHandler()} variant="outline-success">
-                                    Add balance
-                                </Button>
-                            </Form>
+                                    <Form.Group className="mb-3" controlId="number">
+                                        <Form.Label style={{ color: 'white' }}>Number</Form.Label>
+                                        <Form.Control onChange={(event) => this.props.onChangeHandler(event)} type="number" name='number' placeholder="Number" />
+                                    </Form.Group>
+                                    <Button onClick={(event) => this.props.balanceSubmitHandler(event)} variant="outline-success">
+                                        Add balance
+                                    </Button>
+                                </Form>
                             </Container>
                         </Col>
                         <Col>
+                            <Table striped bordered hover variant="dark">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Artiste</th>
+                                        <th>price</th>
+                                        <th>input</th>
+                                        <th>Button</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.props.productList.map(product => (
+                                        product.belonging === this.props.user.id ? 
+                                        <tr key={product.id} >
+                                        <td>{product.name}</td>
+                                        <td>{product.description}</td>
+                                        <td>{product.artiste}</td>
+                                        <td>{product.price} <img src={btcGif} height='25px' width='25px' /> </td>
+                                        <td>{product._id}</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    :
+                                    null
+                                    ))}
+                                </tbody>
+                            </Table>
                         </Col>
                     </Row>
                 </Container>
