@@ -170,4 +170,21 @@ app.post('/balance', checkJwt, urlEncodedParser, (req, res) => {
     })
 })
 
+app.post('/productupdate',checkJwt,urlEncodedParser,(req,res)=>{
+    Product.findById(req.body.id,(err,data)=>{
+        if (err) {
+            throw err
+            res.status(500).end()
+        }
+        data.price = parseInt(req.body.number)
+        data.save((err)=>{
+            if (err) {
+                throw err
+                res.status(404).end()
+            }
+            res.status(200).end()
+        })
+    })
+})
+
 module.exports = app;
