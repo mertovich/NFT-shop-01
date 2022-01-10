@@ -27,7 +27,6 @@ export default class ProductList extends Component {
                                     <Card.Text>
                                         {product.price} <img src={btcGif} height='25px' width='25px' />
                                     </Card.Text>
-                                    
                                     <button onClick={() => this.props.addToCartButton(product)} className='ProductListCardBodyButton' > add to cart </button>
                                 </Card.Body>
                             </Card>

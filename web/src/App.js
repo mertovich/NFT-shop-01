@@ -138,11 +138,11 @@ export default class App extends Component {
         <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver} loginStatus={this.state.loginStatus} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} />} />
-          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} />} />
+          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} />} />
+          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} />} />
           <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} />} />
           <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
-          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} /> : null} />
+          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} /> : null} />
         </Routes>
       </div>
     )
