@@ -4,6 +4,9 @@ import '../App.css'
 import btcGif from '../images/btcGif.gif'
 
 export default class ProfilePage extends Component {
+    componentDidMount(){
+        this.props.login()
+    }
     render() {
         return (
             <div>

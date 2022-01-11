@@ -189,7 +189,7 @@ app.post('/productupdate', checkJwt, urlEncodedParser, (req, res) => {
 
 app.post('/productbuy', checkJwt, urlEncodedParser, (req, res) => {
     let productPrice;
-    var lastUser;
+    let lastUser = ''
     Product.findById(req.body.id, (err, data) => {
         if (err) {
             throw err
@@ -204,7 +204,7 @@ app.post('/productbuy', checkJwt, urlEncodedParser, (req, res) => {
                 res.status(404).end()
             }
         })
-        if (lastUser !== '') {
+        if (lastUser !== '' ) {
             User.findById(lastUser, (err, data) => {
                 if (err) {
                     throw err
