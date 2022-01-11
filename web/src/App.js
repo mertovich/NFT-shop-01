@@ -19,6 +19,10 @@ export default class App extends Component {
     user: {},
   }
 
+  componentDidMount(){
+    this.getProductList()
+  }
+
   NavBarActiveButton = () => {
     if (this.state.NavBarActive === 'false') {
       this.setState({ NavBarActive: 'true' })
@@ -110,6 +114,7 @@ export default class App extends Component {
     let tmp = this.state.number
     if (tmp >= 1) {
       await this.addBalance()
+      this.login()
     } else {
       alert('Number cannot be less than 1')
     }
@@ -151,6 +156,7 @@ export default class App extends Component {
     if (loginControl === 'true') {
       if (product.price <= this.state.user.balance) {
         await this.buy(product._id)
+        this.getProductList()
       }else{
         alert('insufficient balance')
       }
@@ -179,11 +185,11 @@ export default class App extends Component {
         <NavBar NavBarActive={this.state.NavBarActive} NavBarActiveButton={this.NavBarActiveButton} NavBarActiveButtonOver={this.NavBarActiveButtonOver} loginStatus={this.state.loginStatus} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} />} />
-          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} />} />
+          <Route path='/register' element={<Register onChangeHandler={this.onChangeHandler} registerSubmitHandler={this.registerSubmitHandler} loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} login={this.login} />} />
+          <Route path='/login' element={<Login loginStatus={this.state.loginStatus} user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} loginSubmitHandler={this.loginSubmitHandler} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} login={this.login} />} />
           <Route path='/store' element={<Store productList={this.state.productList} getProductList={this.getProductList} addToCartButton={this.addToCartButton} productListBuy={this.productListBuy} />} />
           <Route path='/basket' element={<Basket basket={this.state.basket} removeProductBasketList={this.removeProductBasketList} />} />
-          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} /> : null} />
+          <Route path='/profile' element={this.state.loginStatus === 'true' ? <Profile user={this.state.user} logOutButton={this.logOutButton} onChangeHandler={this.onChangeHandler} balanceSubmitHandler={this.balanceSubmitHandler} productList={this.state.productList} onChangeHandler={this.onChangeHandler} sellSubmitHandler={this.sellSubmitHandler} login={this.login} /> : null} />
         </Routes>
       </div>
     )
